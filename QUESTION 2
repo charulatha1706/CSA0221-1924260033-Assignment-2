@@ -1,1 +1,21 @@
+#include <stdio.h>
 
+int verify_card()
+{
+    printf("Card verified\n");
+    return 1;
+}
+
+int main()
+{
+    int senior = 1;
+    int eligible = 1;
+
+    if (senior && eligible)
+        printf("Concession granted\n");
+
+    if (senior || verify_card())
+        printf("Passenger accepted\n");
+
+    return 0;
+}
