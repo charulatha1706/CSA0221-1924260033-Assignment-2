@@ -1,1 +1,29 @@
+#include <stdio.h>
 
+int main()
+{
+    double price, gross, discount, gst;
+    double total, net;
+    int qty, senior;
+
+    printf("Enter price, quantity and senior status: ");
+    scanf("%lf %d %d", &price, &qty, &senior);
+
+    gross = price * qty;
+
+    discount = senior ? gross * 0.15 : 0;
+
+    gst = (gross - discount) * 0.05;
+
+    total = gross - discount + gst;
+
+    net = (total > 1000) ? total - 50 : total;
+
+    printf("Gross Amount = %.2f\n", gross);
+    printf("Discount = %.2f\n", discount);
+    printf("GST = %.2f\n", gst);
+    printf("Total = %.2f\n", total);
+    printf("Net Amount = %.2f\n", net);
+
+    return 0;
+}
