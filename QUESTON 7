@@ -1,1 +1,89 @@
+#include <stdio.h>
 
+unsigned long original_count = 0;
+unsigned long sqrt_count = 0;
+unsigned long redesigned_count = 0;
+
+int original_prime(unsigned long n)
+{
+    original_count = 0;
+
+    if (n < 2)
+        return 0;
+
+    for (unsigned long i = 2; i < n; i++)
+    {
+        original_count++;
+
+        if (n % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+int sqrt_prime(unsigned long n)
+{
+    sqrt_count = 0;
+
+    if (n < 2)
+        return 0;
+
+    for (unsigned long i = 2; i <= n / i; i++)
+    {
+        sqrt_count++;
+
+        if (n % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+
+
+int redesigned_prime(unsigned long n)
+{
+    redesigned_count = 0;
+
+    if (n < 2)
+        return 0;
+
+    if (n == 2)
+        return 1;
+
+    redesigned_count++;
+
+    if (n % 2 == 0)
+        return 0;
+
+    for (unsigned long i = 3; i <= n / i; i += 2)
+    {
+        redesigned_count++;
+
+        if (n % i == 0)
+            return 0;
+    }
+
+    return 1;
+}
+
+int main(void)
+{
+    unsigned long numbers[] = {97, 100, 7919, 1000003};
+
+    printf("Number\tOriginal\tSquare Root\tRedesigned\n");
+
+    for (int k = 0; k < 4; k++)
+    {
+        unsigned long n = numbers[k];
+
+        original_prime(n);
+        sqrt_prime(n);
+        redesigned_prime(n);
+
+        printf("%lu\t%lu\t\t%lu\t\t%lu\n",
+               n, original_count, sqrt_count,
+               redesigned_count);
+    }
+
+    return 0;
+}
